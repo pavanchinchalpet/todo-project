@@ -261,6 +261,6 @@ If you have any questions or need help:
 
 ---
 
-**Made with ❤️ by [Your Name]**
+**Made with ❤️ by [pavan chinchalpet]**
 
 ⭐ **Star this repository if you found it helpful!**
