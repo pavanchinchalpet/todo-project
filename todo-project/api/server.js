@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
+const cookieParser = require("cookie-parser");
 
 // Load environment variables
 dotenv.config();
@@ -13,12 +14,15 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: process.env.WEB_ORIGIN || "http://localhost:3000", credentials: true }));
 app.use(express.json());
+app.use(cookieParser());
+app.use(express.static('public'));
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/todos", require("./routes/todoRoutes"));
+app.use("/api/test", require("./routes/testRoutes"));
 
 // Error Handling Middleware (optional but good practice)
 app.use((err, req, res, next) => {

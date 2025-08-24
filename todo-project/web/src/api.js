@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000/api"
-,
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000/api",
+  withCredentials: true,
 });
 
 // attach token automatically from localStorage (AuthContext also updates headers)
@@ -12,9 +12,13 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-export // auth
-const register = (payload) => API.post("/auth/register", payload);
+// auth
+export const register = (payload) => API.post("/auth/register", payload);
 export const login = (payload) => API.post("/auth/login", payload);
+export const requestOtp = (email) => API.post("/auth/request-otp", { email });
+export const verifyOtp = (email, code) => API.post("/auth/verify-otp", { email, code });
+export const me = () => API.get("/auth/me");
+export const logoutApi = () => API.post("/auth/logout");
 
 // todos
 export const fetchTodos = () => API.get("/todos");
